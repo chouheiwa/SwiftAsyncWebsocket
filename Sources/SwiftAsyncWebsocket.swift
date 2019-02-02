@@ -15,7 +15,7 @@ public class SwiftAsyncWebsocket {
 
     public let requestHeader: RequestHeader
 
-    public internal(set) var responseHeader: Response?
+    public internal(set) var responseHeader: ResponseHeader?
 
     public var delegateQueue: DispatchQueue? {
         set {
@@ -121,7 +121,7 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
             handleTimeout {
                 let _ = try judgeTimeOut()
 
-                responseHeader = try Response(headerData: data, requestHeader: requestHeader)
+                responseHeader = try ResponseHeader(headerData: data, requestHeader: requestHeader)
 
                 delegate?.websocketDidConnect(self)
 

@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import CommonCrypto
 import CryptoSwift
 
-public class Response {
+public class ResponseHeader {
     static let appendSecKey = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
     public var status: Int {
@@ -29,9 +28,9 @@ public class Response {
             throw WebsocketError.responseHeaderParser
         }
 
-        try Response.checkStatus(arr)
+        try ResponseHeader.checkStatus(arr)
 
-        header = Response.parseToHeader(arr)
+        header = ResponseHeader.parseToHeader(arr)
 
         try checkWebsocketHandshake(requestHeader: requestHeader)
     }
@@ -84,7 +83,7 @@ public class Response {
             throw WebsocketError.responseSecError
         }
 
-        let client = requestHeader.secKey + Response.appendSecKey
+        let client = requestHeader.secKey + ResponseHeader.appendSecKey
 
         let clientKey = (client.data(using: .utf8) ?? Data()).sha1()
             .base64EncodedString()

@@ -15,7 +15,7 @@
 		02D942062205467D006B774F /* SwiftAsyncWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D941FF2205467D006B774F /* SwiftAsyncWebsocket.swift */; };
 		02D942072205467D006B774F /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D942002205467D006B774F /* Opcode.swift */; };
 		02D942082205467D006B774F /* SecurityCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D942012205467D006B774F /* SecurityCode.swift */; };
-		02D9425422059287006B774F /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9425322059287006B774F /* Response.swift */; };
+		02D9425422059287006B774F /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9425322059287006B774F /* ResponseHeader.swift */; };
 		065A0751AB06E3A1B4BE265B /* Pods_SwiftAsyncWebsocketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */; };
 		930A09F75D39C6FE7ADE9A49 /* Pods_SwiftAsyncWebsocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA146370FEA9EE8B285D9A39 /* Pods_SwiftAsyncWebsocket.framework */; };
 /* End PBXBuildFile section */
@@ -42,7 +42,7 @@
 		02D941FF2205467D006B774F /* SwiftAsyncWebsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAsyncWebsocket.swift; sourceTree = "<group>"; };
 		02D942002205467D006B774F /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
 		02D942012205467D006B774F /* SecurityCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityCode.swift; sourceTree = "<group>"; };
-		02D9425322059287006B774F /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		02D9425322059287006B774F /* ResponseHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
 		11C54769E0F0916323AC6959 /* Pods-SwiftAsyncWebsocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.debug.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.debug.xcconfig"; sourceTree = "<group>"; };
 		3C5E229A4EE952F319CDE618 /* Pods-SwiftAsyncWebsocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.release.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.release.xcconfig"; sourceTree = "<group>"; };
 		9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAsyncWebsocketTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,8 +75,8 @@
 		02D941D722054641006B774F = {
 			isa = PBXGroup;
 			children = (
-				02D941E322054641006B774F /* SwiftAsyncWebsocket */,
-				02D941F122054658006B774F /* SwiftAsyncWebsocketTests */,
+				02D941E322054641006B774F /* Sources */,
+				02D941F122054658006B774F /* Tests */,
 				02D941E222054641006B774F /* Products */,
 				3A26D6059881ACC23ADA6747 /* Pods */,
 				5F1D8646BC246F822E674587 /* Frameworks */,
@@ -92,28 +92,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		02D941E322054641006B774F /* SwiftAsyncWebsocket */ = {
+		02D941E322054641006B774F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				02D942002205467D006B774F /* Opcode.swift */,
-				02D9425322059287006B774F /* Response.swift */,
-				02D941FE2205467D006B774F /* RequestHeader.swift */,
-				02D942012205467D006B774F /* SecurityCode.swift */,
 				02D941FF2205467D006B774F /* SwiftAsyncWebsocket.swift */,
 				02D941FC2205467D006B774F /* SwiftAsyncWebsocketDelegate.swift */,
-				02D941FD2205467D006B774F /* WebsocketError.swift */,
+				02D94255220593C2006B774F /* Utils */,
 				02D941E522054641006B774F /* Info.plist */,
 			);
-			path = SwiftAsyncWebsocket;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		02D941F122054658006B774F /* SwiftAsyncWebsocketTests */ = {
+		02D941F122054658006B774F /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				02D941F222054658006B774F /* SwiftAsyncWebsocketTests.swift */,
 				02D941F422054658006B774F /* Info.plist */,
 			);
-			path = SwiftAsyncWebsocketTests;
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		02D94255220593C2006B774F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				02D941FD2205467D006B774F /* WebsocketError.swift */,
+				02D942012205467D006B774F /* SecurityCode.swift */,
+				02D942002205467D006B774F /* Opcode.swift */,
+				02D9425322059287006B774F /* ResponseHeader.swift */,
+				02D941FE2205467D006B774F /* RequestHeader.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3A26D6059881ACC23ADA6747 /* Pods */ = {
@@ -299,7 +307,7 @@
 				02D942062205467D006B774F /* SwiftAsyncWebsocket.swift in Sources */,
 				02D942082205467D006B774F /* SecurityCode.swift in Sources */,
 				02D942032205467D006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */,
-				02D9425422059287006B774F /* Response.swift in Sources */,
+				02D9425422059287006B774F /* ResponseHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +464,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftAsyncWebsocket/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,7 +492,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftAsyncWebsocket/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
