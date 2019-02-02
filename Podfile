@@ -7,10 +7,10 @@ target 'SwiftAsyncWebsocket' do
 
   # Pods for SwiftAsyncWebsocket
   pod 'SwiftAsyncSocket'
+  pod 'CryptoSwift'
   target 'SwiftAsyncWebsocketTests' do
     inherit! :search_paths
     # Pods for testing
- 
   end
 
 end

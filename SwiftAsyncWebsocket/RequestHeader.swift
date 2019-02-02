@@ -32,13 +32,13 @@ public class RequestHeader {
             }
         }
     }
-
+    /// RFC 6455 websocket version is 13
     static let websocketVersion = 13
-
+    /// Current Request
     public let request: URLRequest
-
+    /// If that server need to auth your origin
     public var origin: String?
-
+    
     public let host: String
 
     public var protocols: [String]?
@@ -46,6 +46,8 @@ public class RequestHeader {
     public var cookies: [HTTPCookie]?
 
     let port: UInt16
+
+    let secKey: String
 
     /// Create a request Header with URLRequest
     /// If Request.timeout == 0 that means no time out
@@ -66,6 +68,8 @@ public class RequestHeader {
         }
 
         port = totalPort
+
+        secKey = randomData(16).base64EncodedString()
     }
 
     func toData() -> Data {
@@ -81,7 +85,7 @@ public class RequestHeader {
             + "Host: \(host)\r\n"
             + "Upgrade: websocket\r\n"
             + "Connection: Upgrade\r\n"
-            + "Sec-WebSocket-Key: \(randomData(16).base64EncodedString())\r\n"
+            + "Sec-WebSocket-Key: \(secKey)\r\n"
             + "Sec-WebSocket-Version: \(RequestHeader.websocketVersion)\r\n"
 
         if let origin = origin {
@@ -105,6 +109,8 @@ public class RequestHeader {
                 headerString += "\(key): \(value)\r\n"
             }
         }
+
+        headerString += "\r\n"
 
         guard let data = headerString.data(using: .utf8) else {
             fatalError("Error when transfer string to utf8 data")

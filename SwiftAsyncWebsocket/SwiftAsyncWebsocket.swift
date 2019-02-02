@@ -15,6 +15,8 @@ public class SwiftAsyncWebsocket {
 
     public let requestHeader: RequestHeader
 
+    public internal(set) var responseHeader: Response?
+
     public var delegateQueue: DispatchQueue? {
         set {
             socket.delegateQueue = newValue
@@ -104,22 +106,12 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
     public func socket(_ socket: SwiftAsyncSocket, didConnect toHost: String, port: UInt16) {
         handleTimeout {
             socket.write(data: requestHeader.toData(), timeOut: try judgeTimeOut(), tag: DataType.prepare.rawValue)
+            socket.readData(toData: SwiftAsyncSocket.CRLFData + SwiftAsyncSocket.CRLFData,
+                            timeOut: try judgeTimeOut(), tag: DataType.prepare.rawValue)
         }
     }
 
-    public func socket(_ socket: SwiftAsyncSocket, didWriteDataWith tag: Int) {
-        let type = DataType(tag)
-
-        switch type {
-        case .prepare:
-            handleTimeout {
-                socket.readData(toData: SwiftAsyncSocket.CRLFData + SwiftAsyncSocket.CRLFData,
-                                timeOut: try judgeTimeOut(), tag: DataType.prepare.rawValue)
-            }
-        default:
-            break
-        }
-    }
+    public func socket(_ socket: SwiftAsyncSocket, didWriteDataWith tag: Int) {}
 
     public func socket(_ socket: SwiftAsyncSocket, didRead data: Data, with tag: Int) {
         let type = DataType(tag)
@@ -129,16 +121,22 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
             handleTimeout {
                 let _ = try judgeTimeOut()
 
+                responseHeader = try Response(headerData: data, requestHeader: requestHeader)
+
                 delegate?.websocketDidConnect(self)
+
+                socket.readData(timeOut: -1, tag: DataType.ready.rawValue)
             }
         default:
-            break
+            socket.readData(timeOut: -1, tag: DataType.ready.rawValue)
         }
 
     }
 
     public func socket(_ socket: SwiftAsyncSocket?, didDisconnectWith error: SwiftAsyncSocketError?) {
         guard let socket = socket else { return }
+
+        print("error: \(error)")
 
         if let error = socket.userData as? WebsocketError {
             delegate?.websocketDidDisconnect(self, error: error)
