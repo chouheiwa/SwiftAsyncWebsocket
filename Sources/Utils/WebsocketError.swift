@@ -2,7 +2,7 @@
 //  WebsocketError.swift
 //  SwiftAsyncWebsocket
 //
-//  Created by Di on 2019/2/1.
+//  Created by chouheiwa on 2019/2/1.
 //  Copyright © 2019 chouheiwa. All rights reserved.
 //
 
@@ -13,6 +13,7 @@ public enum WebsocketError: Error {
     case responseHeaderParser
     case responseStatusError(status: Int)
     case responseSecError
+    case responseProtolError(pro: String)
 }
 
 extension WebsocketError: CustomStringConvertible {
@@ -29,7 +30,9 @@ extension WebsocketError: CustomStringConvertible {
         case .responseStatusError(status: let status):
             return "\(errorDomain) Reason: Received bad response code from server. Code: \(status)"
         case .responseSecError:
-            return "\(errorDomain) Reason: Server not confirm Sec-WebSocket-Accept, or respone was wrong"
+            return "\(errorDomain) Reason: Server not confirm Sec-WebSocket-Accept, or response was wrong"
+        case .responseProtolError(pro: let pro):
+            return "\(errorDomain) Reason: Server specified Sec-WebSocket-Protocol \"\(pro)\" that wasn't requested."
         }
     }
 

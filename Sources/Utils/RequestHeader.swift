@@ -2,7 +2,7 @@
 //  RequestHeader.swift
 //  SwiftAsyncWebsocket
 //
-//  Created by Di on 2019/2/1.
+//  Created by chouheiwa on 2019/2/1.
 //  Copyright © 2019 chouheiwa. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import Foundation
 
 /// User set Request
 public class RequestHeader {
+    
     enum Scheme {
         case ws, wss
 
@@ -44,6 +45,8 @@ public class RequestHeader {
     public var protocols: [String]?
 
     public var cookies: [HTTPCookie]?
+
+    public var usedProtocol: String?
 
     let port: UInt16
 

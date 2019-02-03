@@ -1,8 +1,8 @@
 //
 //  Response.swift
-//  SwiftAsyncWebsocketApp
+//  SwiftAsyncWebsocket
 //
-//  Created by Di on 2019/2/2.
+//  Created by chouheiwa on 2019/2/2.
 //  Copyright © 2019 chouheiwa. All rights reserved.
 //
 
@@ -33,6 +33,8 @@ public class ResponseHeader {
         header = ResponseHeader.parseToHeader(arr)
 
         try checkWebsocketHandshake(requestHeader: requestHeader)
+
+        try checkWebsocketProtocol(requestHeader: requestHeader)
     }
 
     class func checkStatus(_ arr: [String]) throws {
@@ -91,5 +93,16 @@ public class ResponseHeader {
         guard shakeKey == clientKey else {
             throw WebsocketError.responseSecError
         }
+    }
+
+    func checkWebsocketProtocol(requestHeader: RequestHeader) throws {
+        guard let protocols = header["Sec-WebSocket-Protocol"] else { return }
+
+        guard let protocolArray = requestHeader.protocols,
+            (protocolArray.contains(protocols)) else {
+                throw WebsocketError.responseProtolError(pro: protocols)
+        }
+
+        requestHeader.usedProtocol = protocols
     }
 }
