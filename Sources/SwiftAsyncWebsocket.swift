@@ -14,6 +14,24 @@ public class SwiftAsyncWebsocket {
         case connecting, open, closing, closed
     }
 
+    /// In websocket there has two kinds receive data
+    /// 1. All data send in one time
+    /// 2. Send data with chunk
+    /// So this two kind means when we receive (2) data,
+    ///
+    /// - finalReturn: return entire data
+    ///     finalReturn is that SwiftAsyncWebsocket hold the process data
+    ///     call the delegate when we receive the fin data
+    ///     it will return all the process data into an entire data
+    ///     It is the defaut setting
+    /// - eachReturn: return partical data
+    ///     eachReturn means each time SwiftAsyncWebsocket received data,
+    ///     delegate will be called, no data will be cached
+    public enum DataControlKind {
+        case finalReturn
+        case eachReturn
+    }
+
     let socket: SwiftAsyncSocket
     public weak var delegate: SwiftAsyncWebsocketDelegate?
 
@@ -22,6 +40,8 @@ public class SwiftAsyncWebsocket {
     public internal(set) var responseHeader: ResponseHeader?
 
     public var state: State = .connecting
+
+    public var kind: DataControlKind = .eachReturn
 
     public var delegateQueue: DispatchQueue? {
         set {
@@ -99,6 +119,10 @@ public class SwiftAsyncWebsocket {
             fatalError("\(error)")
         }
     }
+
+    func handleReceive(frameData: FrameData) {
+
+    }
 }
 
 extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
@@ -138,7 +162,6 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
 
     public func socket(_ socket: SwiftAsyncSocket, didRead data: Data, with tag: Int) {
         let type = DataType(tag)
-        print("Receive Data")
         handleError {
             switch type {
             case .prepare:
@@ -149,14 +172,14 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
 
                 self.state = .open
 
-                delegate?.websocketDidConnect(self)
+                delegate?.websocketDidOpen(self)
 
                 socket.readData(timeOut: -1, tag: DataType.ready.rawValue)
 
             default:
                 let frameData = try FrameData(receiveData: data)
 
-                print("ReceiveData: \n\(String(data: frameData.data, encoding: .utf8) ?? "111")")
+
 
                 socket.readData(timeOut: -1, tag: DataType.ready.rawValue)
             }
@@ -167,10 +190,10 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
     public func socket(_ socket: SwiftAsyncSocket?, didDisconnectWith error: SwiftAsyncSocketError?) {
         guard let socket = socket else { return }
 
-        print("error: \(error)")
+        self.state = .closed
 
         if let error = socket.userData as? WebsocketError {
-            delegate?.websocketDidDisconnect(self, error: error)
+            delegate?.websocket(self, didCloseWith: error)
             return
         }
     }

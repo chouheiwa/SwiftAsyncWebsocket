@@ -21,11 +21,13 @@ struct FrameData {
     var data: Data
     let opcode: Opcode
     let isOver: Bool
+    let isClient: Bool
 
-    init(opcode: Opcode, data: Data) {
+    init(opcode: Opcode, data: Data, isClient: Bool = true) {
         self.data = data
         self.opcode = opcode
         self.isOver = true
+        self.isClient = isClient
     }
 
     /* From RFC:
@@ -49,19 +51,27 @@ struct FrameData {
      |                     Payload Data continued ...                |
      +---------------------------------------------------------------+
      */
-    init(receiveData: Data) throws {
+    init(receiveData: Data, isClient: Bool = true) throws {
         var pointer: UnsafePointer<UInt8> = receiveData.withUnsafeBytes({$0})
 
         guard pointer.pointee & Mask.Rsv == 0 else {
             throw WebsocketError.responseProtolError(pro: "Server used RSV bits")
         }
+
+        self.isClient = isClient
         // Fin and Opcode
-        self.isOver = (pointer.pointee & Mask.FIN) == 0x1
+        let isOver = (pointer.pointee & Mask.FIN) != 0
         // Here use
         guard let opcode = Opcode(rawValue: pointer.pointee & Mask.Opcode) else {
             throw WebsocketError.responseProtolError(pro:
                 "Server return undefine Opcode")
         }
+
+        guard isOver || (!isOver && opcode == Opcode.CONTINUOUS) else {
+            throw WebsocketError.responseProtolError(pro: "Server return non FIN data, "
+                + "but the opcode is not CONTINUOUS")
+        }
+        self.isOver = isOver
 
         self.opcode = opcode
         // Mask
@@ -119,8 +129,10 @@ struct FrameData {
         pointer.pointee = Mask.FIN | opcode
 
         let maskPointer = pointer + 1
-        // set the mask
-        maskPointer.pointee |= Mask.Mask
+        if isClient {
+            // set the mask
+            maskPointer.pointee |= Mask.Mask
+        }
         // set pay load length
         var frameBufferSize: size_t = 2
 
@@ -149,20 +161,26 @@ struct FrameData {
         }
 
         let unmaskedPayloadBuffer: UnsafePointer<UInt8> = data.withUnsafeBytes({$0})
+        // Only client need to mask data
+        if isClient {
+            let maskKey = pointer + frameBufferSize
+            // set MaskKey
+            let randomBytesSize = MemoryLayout<UInt32>.size
+            //TODO: (nlutsenko) Check if there was an error.
+            _ = SecRandomCopyBytes(kSecRandomDefault, randomBytesSize, maskKey)
 
-        let maskKey = pointer + frameBufferSize
-        // set MaskKey
-        let randomBytesSize = MemoryLayout<UInt32>.size
-        //TODO: (nlutsenko) Check if there was an error.
-        _ = SecRandomCopyBytes(kSecRandomDefault, randomBytesSize, maskKey)
+            frameBufferSize += randomBytesSize
 
-        frameBufferSize += randomBytesSize
+            let frameBufferPayloadPointer = pointer + frameBufferSize
 
-        let frameBufferPayloadPointer = pointer + frameBufferSize
+            memcpy(frameBufferPayloadPointer, unmaskedPayloadBuffer, payloadLength)
 
-        memcpy(frameBufferPayloadPointer, unmaskedPayloadBuffer, payloadLength)
+            SIMDHelper.MaskBytesSIMD(bytes: frameBufferPayloadPointer, length: payloadLength, maskKey: maskKey)
+        } else { // Server only need to send data
+            let frameBufferPayloadPointer = pointer + frameBufferSize
 
-        SIMDHelper.MaskBytesSIMD(bytes: frameBufferPayloadPointer, length: payloadLength, maskKey: maskKey)
+            memcpy(frameBufferPayloadPointer, unmaskedPayloadBuffer, payloadLength)
+        }
 
         totalSendData.count = payloadLength + frameBufferSize
 
