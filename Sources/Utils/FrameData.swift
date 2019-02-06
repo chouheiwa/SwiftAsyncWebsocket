@@ -66,8 +66,12 @@ struct FrameData {
             throw WebsocketError.responseProtolError(pro:
                 "Server return undefine Opcode")
         }
-
-        guard isOver || (!isOver && opcode == Opcode.CONTINUOUS) else {
+        // Condition (1): FIN Data and any opcode
+        // Condition (2): Non FIN and opcode can be CONTINUOUS | BINARY | DATA
+        let condition = opcode == Opcode.BINARY ||
+            opcode == Opcode.TEXT ||
+            opcode == Opcode.CONTINUOUS
+        guard isOver || (!isOver && condition) else {
             throw WebsocketError.responseProtolError(pro: "Server return non FIN data, "
                 + "but the opcode is not CONTINUOUS")
         }

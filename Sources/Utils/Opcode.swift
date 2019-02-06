@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Opcode: UInt8 {
+public enum Opcode: UInt8 {
     /// Text Opcode
     case TEXT = 0x1
     /// Binary Opcode
