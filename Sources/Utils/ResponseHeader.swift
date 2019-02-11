@@ -22,6 +22,9 @@ public class ResponseHeader {
         guard let responseString = String(data: headerData, encoding: .utf8) else {
             throw WebsocketError.responseHeaderParser
         }
+        print(requestHeader.secKey)
+        print(responseString)
+
         let arr = responseString.components(separatedBy: "\r\n")
 
         guard arr.count > 0 else {

@@ -32,6 +32,30 @@ public class SwiftAsyncWebsocket {
         case eachReturn
     }
 
+    public enum StatusCode: UInt16 {
+        // 0-999: reserved and not used
+        case normal = 1000
+        case goingAway =  1001
+        case protocolError = 1002
+        case unhandleType = 1003
+        // 1004 reserved
+        case noStatusReceived = 1005
+        case abnormal = 1006
+        case invalidUTF8 = 1007
+        case policyViolated = 1008
+        case messageTooBig = 1009
+        case missingExtension = 1010
+        case internalError = 1011
+        case serviceRestart = 1012
+        case tryagainLater = 1013
+        // 1014: Reserved for future use by the WebSocket standard.
+        case TLSHandshake = 1015
+        // 1016-1999: Reserved for future use by the WebSocket standard.
+        // 2000-2999: Reserved for use by WebSocket extensions.
+        // 3000-3999: Available for use by libraries and frameworks. May not be used by applications. Available for registration at the IANA via first-come, first-serve.
+        // 4000-4999: Available for use by applications.
+    }
+
     let socket: SwiftAsyncSocket
     public weak var delegate: SwiftAsyncWebsocketDelegate?
 
@@ -39,7 +63,7 @@ public class SwiftAsyncWebsocket {
 
     public internal(set) var responseHeader: ResponseHeader?
 
-    public var state: State = .connecting
+    public var state: State = .closed
 
     public var kind: DataControlKind = .finalReturn
 
@@ -82,6 +106,10 @@ public class SwiftAsyncWebsocket {
         self.connectedTime = Date().timeIntervalSince1970
 
         try socket.connect(toHost: requestHeader.host, onPort: requestHeader.port, timeOut: timeout)
+
+        socket.socketQueueDo {
+            self.state = .connecting
+        }
     }
 
     public func send(data: Data) {
@@ -104,6 +132,57 @@ public class SwiftAsyncWebsocket {
         }
 
         let frameData = FrameData(opcode: .TEXT, data: data)
+
+        socket.write(data: frameData.caculateToSendData(), timeOut: -1, tag: 1)
+    }
+
+    public func send(pingData: Data?) {
+        guard state == .open else {
+            return
+        }
+
+        let frameData = FrameData(opcode: .PING, data: pingData ?? Data())
+
+        socket.write(data: frameData.caculateToSendData(), timeOut: -1, tag: 1)
+    }
+
+    public func close(code: StatusCode = .normal, reason: String? = nil) {
+        guard state == .open || state == .connecting else {
+            return
+        }
+
+        socket.socketQueueDo {
+            self.state = .closing
+        }
+
+        guard state == .open else {
+
+            socket.disconnect()
+            return
+        }
+
+        let finalReason = reason ?? ""
+
+        guard let utf8Reason = finalReason.data(using: .utf8) else {
+            fatalError("Convert UTF8 failed")
+        }
+        let size = MemoryLayout<UInt16>.size
+
+        var sendData = Data(count: min(125, utf8Reason.count + size))
+
+        sendData.withUnsafeMutableBytes {
+            $0.pointee = CFSwapInt16(code.rawValue)
+        }
+
+        if utf8Reason.count > 0 {
+            let totalIndex = sendData.count - 1
+
+            sendData.replaceSubrange(size..<totalIndex,
+                                     with: utf8Reason.withUnsafeBytes({UnsafeRawPointer($0)}),
+                                     count: min(123, sendData.count))
+        }
+
+        let frameData = FrameData(opcode: .CLOSING, data: sendData)
 
         socket.write(data: frameData.caculateToSendData(), timeOut: -1, tag: 1)
     }
@@ -255,8 +334,6 @@ public class SwiftAsyncWebsocket {
             }
         }
     }
-
-
 }
 
 extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
@@ -299,9 +376,6 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
         handleError {
             switch type {
             case .prepare:
-
-                let _ = try judgeTimeOut()
-
                 responseHeader = try ResponseHeader(headerData: data, requestHeader: requestHeader)
 
                 self.state = .open

@@ -90,7 +90,6 @@ public class RequestHeader {
             + "Connection: Upgrade\r\n"
             + "Sec-WebSocket-Key: \(secKey)\r\n"
             + "Sec-WebSocket-Version: \(RequestHeader.websocketVersion)\r\n"
-
         if let origin = origin {
             headerString += "Origin: \(origin)\r\n"
         }
