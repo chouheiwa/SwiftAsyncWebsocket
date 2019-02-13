@@ -30,20 +30,6 @@ public protocol SwiftAsyncWebsocketDelegate: class {
     ///   - type: type (BINARY | TEXT)
     ///   - fin: is the final data
     func websocket(_ websocket: SwiftAsyncWebsocket, didReceive messgae: Any, type: Opcode, isFinalData fin: Bool)
-
-    /// This method will be invoked if that connectiong was failed or other connection problem.
-    ///
-    /// - Parameters:
-    ///   - websocket: websocket
-    ///   - error: Caused error
-    func websocket(_ websocket: SwiftAsyncWebsocket, failedConnect error: WebsocketError?)
-    /// When we receive the close frame this method will be invoked
-    ///
-    /// - Parameters:
-    ///   - websocket: websocket
-    ///   - code: WebsocketCode
-    ///   - reason: The server given reason
-    func websocket(_ websocekt: SwiftAsyncWebsocket, didCloseWith code: UInt16, reason: String?)
     /// This function will be called when websocket receive ping data
     /// Under normal condition, the ping data will be empty
     /// But in RF6455 the control frame can send less then 125 bytes data
@@ -59,5 +45,28 @@ public protocol SwiftAsyncWebsocketDelegate: class {
     /// - Parameters:
     ///   - websocket: websocket
     ///   - data: pong data
-    func websocket(_ websocket: SwiftAsyncWebsocket, didReceovePong data: Data)
+    func websocket(_ websocket: SwiftAsyncWebsocket, didReceivePong data: Data)
+    /// This method will be invoked if that connectiong was failed or other connection problem.
+    ///
+    /// - Parameters:
+    ///   - websocket: websocket
+    ///   - error: Caused error
+    func websocket(_ websocket: SwiftAsyncWebsocket, failedConnect error: WebsocketError?)
+    /// When we receive the close frame this method will be invoked
+    ///
+    /// - Parameters:
+    ///   - websocket: websocket
+    ///   - code: WebsocketCode
+    ///   - reason: The server given reason
+    func websocket(_ websocekt: SwiftAsyncWebsocket, didCloseWith code: UInt16, reason: String?)
+}
+
+extension SwiftAsyncWebsocketDelegate {
+    public func websocketDidConnect(_ websocket: SwiftAsyncWebsocket) {}
+    public func websocketDidOpen(_ websocket: SwiftAsyncWebsocket) {}
+    public func websocket(_ websocket: SwiftAsyncWebsocket, didReceive messgae: Any, type: Opcode, isFinalData fin: Bool) {}
+    public func websocket(_ websocket: SwiftAsyncWebsocket, didReceivePing data: Data) -> Data? { return nil }
+    public func websocket(_ websocket: SwiftAsyncWebsocket, didReceivePong data: Data) {}
+    public func websocket(_ websocket: SwiftAsyncWebsocket, failedConnect error: WebsocketError?) {}
+    public func websocket(_ websocekt: SwiftAsyncWebsocket, didCloseWith code: UInt16, reason: String?) {}
 }

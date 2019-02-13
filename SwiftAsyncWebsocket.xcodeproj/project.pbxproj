@@ -19,8 +19,21 @@
 		02D94294220697BB006B774F /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428A220697BB006B774F /* ResponseHeader.swift */; };
 		02D94295220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */; };
 		02D942B62213BA88006B774F /* CloseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D942B52213BA87006B774F /* CloseData.swift */; };
+		02D942C52213E012006B774F /* SwiftAsyncWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94282220697BB006B774F /* SwiftAsyncWebsocket.swift */; };
+		02D942C62213E014006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */; };
+		02D942C72213E018006B774F /* WebsocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94285220697BB006B774F /* WebsocketError.swift */; };
+		02D942C82213E018006B774F /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94286220697BB006B774F /* Opcode.swift */; };
+		02D942C92213E018006B774F /* SecurityCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94288220697BB006B774F /* SecurityCode.swift */; };
+		02D942CA2213E018006B774F /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94289220697BB006B774F /* RequestHeader.swift */; };
+		02D942CB2213E018006B774F /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428A220697BB006B774F /* ResponseHeader.swift */; };
+		02D942CC2213E018006B774F /* SIMDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94287220697BB006B774F /* SIMDHelper.swift */; };
+		02D942CD2213E018006B774F /* FrameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94284220697BB006B774F /* FrameData.swift */; };
+		02D942CE2213E018006B774F /* CloseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D942B52213BA87006B774F /* CloseData.swift */; };
 		065A0751AB06E3A1B4BE265B /* Pods_SwiftAsyncWebsocketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */; };
+		6E879AD023F5569223029F1B /* Pods_common_pods_SwiftAsyncWebsocket_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF2D6CB3C3D7DD181C26805 /* Pods_common_pods_SwiftAsyncWebsocket_Mac.framework */; };
+		73630589DADEFF10BBA30F8F /* Pods_common_pods_SwiftAsyncWebsocket_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A153F9EE9F6242B522EFBE9 /* Pods_common_pods_SwiftAsyncWebsocket_iOS.framework */; };
 		930A09F75D39C6FE7ADE9A49 /* Pods_SwiftAsyncWebsocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA146370FEA9EE8B285D9A39 /* Pods_SwiftAsyncWebsocket.framework */; };
+		C4B2CE4BF095190CB830F0C0 /* Pods_common_pods_SwiftAsyncWebsocketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCFDC48C49FD6843140525F /* Pods_common_pods_SwiftAsyncWebsocketTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +62,23 @@
 		02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAsyncWebsocketDelegate.swift; sourceTree = "<group>"; };
 		02D9428C220697BB006B774F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02D942B52213BA87006B774F /* CloseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseData.swift; sourceTree = "<group>"; };
+		02D942B72213C1BB006B774F /* SwiftAsyncWebsocket.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftAsyncWebsocket.podspec; sourceTree = "<group>"; };
+		02D942BD2213DF79006B774F /* SwiftAsyncWebsocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftAsyncWebsocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C54769E0F0916323AC6959 /* Pods-SwiftAsyncWebsocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.debug.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.debug.xcconfig"; sourceTree = "<group>"; };
+		14687D52C7554D64D44C9E85 /* Pods-common_pods-SwiftAsyncWebsocket_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocket_Mac.release.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocket_Mac/Pods-common_pods-SwiftAsyncWebsocket_Mac.release.xcconfig"; sourceTree = "<group>"; };
+		18344E519B258195971339CC /* Pods-common_pods-SwiftAsyncWebsocketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocketTests.release.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocketTests/Pods-common_pods-SwiftAsyncWebsocketTests.release.xcconfig"; sourceTree = "<group>"; };
+		3A153F9EE9F6242B522EFBE9 /* Pods_common_pods_SwiftAsyncWebsocket_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_pods_SwiftAsyncWebsocket_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5E229A4EE952F319CDE618 /* Pods-SwiftAsyncWebsocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.release.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.release.xcconfig"; sourceTree = "<group>"; };
+		7AF2D6CB3C3D7DD181C26805 /* Pods_common_pods_SwiftAsyncWebsocket_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_pods_SwiftAsyncWebsocket_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C7A064EA2AF8926094AA08A /* Pods-common_pods-SwiftAsyncWebsocket_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocket_Mac.debug.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocket_Mac/Pods-common_pods-SwiftAsyncWebsocket_Mac.debug.xcconfig"; sourceTree = "<group>"; };
+		8D63F021A4DBF35BA9E26B30 /* Pods-common_pods-SwiftAsyncWebsocketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocketTests.debug.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocketTests/Pods-common_pods-SwiftAsyncWebsocketTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8DCFDC48C49FD6843140525F /* Pods_common_pods_SwiftAsyncWebsocketTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_common_pods_SwiftAsyncWebsocketTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAsyncWebsocketTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03FC7DD78C616B5EDD3632B /* Pods-SwiftAsyncWebsocketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocketTests.release.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocketTests/Pods-SwiftAsyncWebsocketTests.release.xcconfig"; sourceTree = "<group>"; };
 		BACE11581679B406A5DB1F93 /* Pods-SwiftAsyncWebsocketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocketTests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocketTests/Pods-SwiftAsyncWebsocketTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CF8340C33F3300C0FB7321DE /* Pods-common_pods-SwiftAsyncWebsocket_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocket_iOS.debug.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocket_iOS/Pods-common_pods-SwiftAsyncWebsocket_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DA146370FEA9EE8B285D9A39 /* Pods_SwiftAsyncWebsocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAsyncWebsocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDB41E99DCA91D85DEE4EF6C /* Pods-common_pods-SwiftAsyncWebsocket_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-common_pods-SwiftAsyncWebsocket_iOS.release.xcconfig"; path = "Target Support Files/Pods-common_pods-SwiftAsyncWebsocket_iOS/Pods-common_pods-SwiftAsyncWebsocket_iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				930A09F75D39C6FE7ADE9A49 /* Pods_SwiftAsyncWebsocket.framework in Frameworks */,
+				73630589DADEFF10BBA30F8F /* Pods_common_pods_SwiftAsyncWebsocket_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +97,15 @@
 			files = (
 				02D941F522054658006B774F /* SwiftAsyncWebsocket.framework in Frameworks */,
 				065A0751AB06E3A1B4BE265B /* Pods_SwiftAsyncWebsocketTests.framework in Frameworks */,
+				C4B2CE4BF095190CB830F0C0 /* Pods_common_pods_SwiftAsyncWebsocketTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02D942BA2213DF79006B774F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E879AD023F5569223029F1B /* Pods_common_pods_SwiftAsyncWebsocket_Mac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +115,7 @@
 		02D941D722054641006B774F = {
 			isa = PBXGroup;
 			children = (
+				02D942B72213C1BB006B774F /* SwiftAsyncWebsocket.podspec */,
 				02D94281220697BB006B774F /* Sources */,
 				02D941F122054658006B774F /* Tests */,
 				02D941E222054641006B774F /* Products */,
@@ -94,6 +129,7 @@
 			children = (
 				02D941E122054641006B774F /* SwiftAsyncWebsocket.framework */,
 				02D941F022054658006B774F /* SwiftAsyncWebsocketTests.xctest */,
+				02D942BD2213DF79006B774F /* SwiftAsyncWebsocket.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +176,12 @@
 				3C5E229A4EE952F319CDE618 /* Pods-SwiftAsyncWebsocket.release.xcconfig */,
 				BACE11581679B406A5DB1F93 /* Pods-SwiftAsyncWebsocketTests.debug.xcconfig */,
 				A03FC7DD78C616B5EDD3632B /* Pods-SwiftAsyncWebsocketTests.release.xcconfig */,
+				8D63F021A4DBF35BA9E26B30 /* Pods-common_pods-SwiftAsyncWebsocketTests.debug.xcconfig */,
+				18344E519B258195971339CC /* Pods-common_pods-SwiftAsyncWebsocketTests.release.xcconfig */,
+				7C7A064EA2AF8926094AA08A /* Pods-common_pods-SwiftAsyncWebsocket_Mac.debug.xcconfig */,
+				14687D52C7554D64D44C9E85 /* Pods-common_pods-SwiftAsyncWebsocket_Mac.release.xcconfig */,
+				CF8340C33F3300C0FB7321DE /* Pods-common_pods-SwiftAsyncWebsocket_iOS.debug.xcconfig */,
+				DDB41E99DCA91D85DEE4EF6C /* Pods-common_pods-SwiftAsyncWebsocket_iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -149,6 +191,9 @@
 			children = (
 				DA146370FEA9EE8B285D9A39 /* Pods_SwiftAsyncWebsocket.framework */,
 				9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */,
+				8DCFDC48C49FD6843140525F /* Pods_common_pods_SwiftAsyncWebsocketTests.framework */,
+				7AF2D6CB3C3D7DD181C26805 /* Pods_common_pods_SwiftAsyncWebsocket_Mac.framework */,
+				3A153F9EE9F6242B522EFBE9 /* Pods_common_pods_SwiftAsyncWebsocket_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -163,12 +208,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02D942B82213DF79006B774F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		02D941E022054641006B774F /* SwiftAsyncWebsocket */ = {
+		02D941E022054641006B774F /* SwiftAsyncWebsocket_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02D941E922054641006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket" */;
+			buildConfigurationList = 02D941E922054641006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket_iOS" */;
 			buildPhases = (
 				C777B91BA11E7822D18C3543 /* [CP] Check Pods Manifest.lock */,
 				02D941DC22054641006B774F /* Headers */,
@@ -180,7 +232,7 @@
 			);
 			dependencies = (
 			);
-			name = SwiftAsyncWebsocket;
+			name = SwiftAsyncWebsocket_iOS;
 			productName = SwiftAsyncWebsocket;
 			productReference = 02D941E122054641006B774F /* SwiftAsyncWebsocket.framework */;
 			productType = "com.apple.product-type.framework";
@@ -193,6 +245,7 @@
 				02D941EC22054658006B774F /* Sources */,
 				02D941ED22054658006B774F /* Frameworks */,
 				02D941EE22054658006B774F /* Resources */,
+				FB4B0C5FE1D54AB42B6A4FCF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,6 +256,25 @@
 			productName = SwiftAsyncWebsocketTests;
 			productReference = 02D941F022054658006B774F /* SwiftAsyncWebsocketTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		02D942BC2213DF79006B774F /* SwiftAsyncWebsocket_Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02D942C22213DF79006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket_Mac" */;
+			buildPhases = (
+				D31BC4844BDC4BB96509F7A4 /* [CP] Check Pods Manifest.lock */,
+				02D942B82213DF79006B774F /* Headers */,
+				02D942B92213DF79006B774F /* Sources */,
+				02D942BA2213DF79006B774F /* Frameworks */,
+				02D942BB2213DF79006B774F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftAsyncWebsocket_Mac;
+			productName = SwiftAsyncWebsocket_Mac;
+			productReference = 02D942BD2213DF79006B774F /* SwiftAsyncWebsocket.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -221,6 +293,9 @@
 					02D941EF22054658006B774F = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					02D942BC2213DF79006B774F = {
+						CreatedOnToolsVersion = 10.1;
+					};
 				};
 			};
 			buildConfigurationList = 02D941DB22054641006B774F /* Build configuration list for PBXProject "SwiftAsyncWebsocket" */;
@@ -235,7 +310,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				02D941E022054641006B774F /* SwiftAsyncWebsocket */,
+				02D941E022054641006B774F /* SwiftAsyncWebsocket_iOS */,
+				02D942BC2213DF79006B774F /* SwiftAsyncWebsocket_Mac */,
 				02D941EF22054658006B774F /* SwiftAsyncWebsocketTests */,
 			);
 		};
@@ -250,6 +326,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		02D941EE22054658006B774F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02D942BB2213DF79006B774F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -274,7 +357,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftAsyncWebsocketTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-common_pods-SwiftAsyncWebsocketTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -296,11 +379,57 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftAsyncWebsocket-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-common_pods-SwiftAsyncWebsocket_iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D31BC4844BDC4BB96509F7A4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-common_pods-SwiftAsyncWebsocket_Mac-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB4B0C5FE1D54AB42B6A4FCF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-common_pods-SwiftAsyncWebsocketTests/Pods-common_pods-SwiftAsyncWebsocketTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAsyncSocket-iOS/SwiftAsyncSocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAsyncSocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-common_pods-SwiftAsyncWebsocketTests/Pods-common_pods-SwiftAsyncWebsocketTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -331,12 +460,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02D942B92213DF79006B774F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02D942CC2213E018006B774F /* SIMDHelper.swift in Sources */,
+				02D942C72213E018006B774F /* WebsocketError.swift in Sources */,
+				02D942CE2213E018006B774F /* CloseData.swift in Sources */,
+				02D942CD2213E018006B774F /* FrameData.swift in Sources */,
+				02D942C82213E018006B774F /* Opcode.swift in Sources */,
+				02D942C52213E012006B774F /* SwiftAsyncWebsocket.swift in Sources */,
+				02D942C62213E014006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */,
+				02D942CB2213E018006B774F /* ResponseHeader.swift in Sources */,
+				02D942CA2213E018006B774F /* RequestHeader.swift in Sources */,
+				02D942C92213E018006B774F /* SecurityCode.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		02D941F722054658006B774F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02D941E022054641006B774F /* SwiftAsyncWebsocket */;
+			target = 02D941E022054641006B774F /* SwiftAsyncWebsocket_iOS */;
 			targetProxy = 02D941F622054658006B774F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -466,7 +612,7 @@
 		};
 		02D941EA22054641006B774F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11C54769E0F0916323AC6959 /* Pods-SwiftAsyncWebsocket.debug.xcconfig */;
+			baseConfigurationReference = CF8340C33F3300C0FB7321DE /* Pods-common_pods-SwiftAsyncWebsocket_iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -484,7 +630,8 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.chouheiwa.SwiftAsyncWebsocket;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = SwiftAsyncWebsocket;
+				PRODUCT_NAME = SwiftAsyncWebsocket;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -494,7 +641,7 @@
 		};
 		02D941EB22054641006B774F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C5E229A4EE952F319CDE618 /* Pods-SwiftAsyncWebsocket.release.xcconfig */;
+			baseConfigurationReference = DDB41E99DCA91D85DEE4EF6C /* Pods-common_pods-SwiftAsyncWebsocket_iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -512,7 +659,8 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.chouheiwa.SwiftAsyncWebsocket;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = SwiftAsyncWebsocket;
+				PRODUCT_NAME = SwiftAsyncWebsocket;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -521,7 +669,7 @@
 		};
 		02D941F922054658006B774F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BACE11581679B406A5DB1F93 /* Pods-SwiftAsyncWebsocketTests.debug.xcconfig */;
+			baseConfigurationReference = 8D63F021A4DBF35BA9E26B30 /* Pods-common_pods-SwiftAsyncWebsocketTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -541,7 +689,7 @@
 		};
 		02D941FA22054658006B774F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A03FC7DD78C616B5EDD3632B /* Pods-SwiftAsyncWebsocketTests.release.xcconfig */;
+			baseConfigurationReference = 18344E519B258195971339CC /* Pods-common_pods-SwiftAsyncWebsocketTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -559,6 +707,66 @@
 			};
 			name = Release;
 		};
+		02D942C32213DF79006B774F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C7A064EA2AF8926094AA08A /* Pods-common_pods-SwiftAsyncWebsocket_Mac.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2UNAYZPR4S;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.chouheiwa.SwiftAsyncWebsocket;
+				PRODUCT_MODULE_NAME = SwiftAsyncWebsocket;
+				PRODUCT_NAME = SwiftAsyncWebsocket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		02D942C42213DF79006B774F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14687D52C7554D64D44C9E85 /* Pods-common_pods-SwiftAsyncWebsocket_Mac.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2UNAYZPR4S;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.chouheiwa.SwiftAsyncWebsocket;
+				PRODUCT_MODULE_NAME = SwiftAsyncWebsocket;
+				PRODUCT_NAME = SwiftAsyncWebsocket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,7 +779,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02D941E922054641006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket" */ = {
+		02D941E922054641006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				02D941EA22054641006B774F /* Debug */,
@@ -585,6 +793,15 @@
 			buildConfigurations = (
 				02D941F922054658006B774F /* Debug */,
 				02D941FA22054658006B774F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02D942C22213DF79006B774F /* Build configuration list for PBXNativeTarget "SwiftAsyncWebsocket_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02D942C32213DF79006B774F /* Debug */,
+				02D942C42213DF79006B774F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

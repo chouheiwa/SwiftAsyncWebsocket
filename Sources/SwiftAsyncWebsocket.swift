@@ -64,7 +64,7 @@ public class SwiftAsyncWebsocket {
 
     public internal(set) var responseHeader: ResponseHeader?
 
-    public var state: State = .closed
+    public private(set) var state: State = .closed
 
     public var kind: DataControlKind = .finalReturn
 
@@ -217,7 +217,7 @@ public class SwiftAsyncWebsocket {
 
             socket.write(data: pongFrameData.caculateToSendData(), timeOut: -1, tag: 1)
         case .PONG:
-            delegate?.websocket(self, didReceovePong: frameData.data)
+            delegate?.websocket(self, didReceivePong: frameData.data)
         case .CLOSING:
             handleClose(data: frameData)
         case .CONTINUOUS:
