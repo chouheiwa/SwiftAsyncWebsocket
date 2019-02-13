@@ -9,6 +9,11 @@
 import Foundation
 
 public protocol SwiftAsyncWebsocketDelegate: class {
+    /// The websocket has created TCP/IP connect
+    /// and will send HTTP handshake to upgrade to websocket connection
+    ///
+    /// - Parameter websocket: websocket
+    func websocketDidConnect(_ websocket: SwiftAsyncWebsocket)
     /// The websocket has already finished connection and can receive or send data
     ///
     /// - Parameter websocket: websocket
@@ -25,12 +30,20 @@ public protocol SwiftAsyncWebsocketDelegate: class {
     ///   - type: type (BINARY | TEXT)
     ///   - fin: is the final data
     func websocket(_ websocket: SwiftAsyncWebsocket, didReceive messgae: Any, type: Opcode, isFinalData fin: Bool)
-    ///
+
+    /// This method will be invoked if that connectiong was failed or other connection problem.
     ///
     /// - Parameters:
-    ///   - websocket:
-    ///   - error:
-    func websocket(_ websocket: SwiftAsyncWebsocket, didCloseWith error: WebsocketError?)
+    ///   - websocket: websocket
+    ///   - error: Caused error
+    func websocket(_ websocket: SwiftAsyncWebsocket, failedConnect error: WebsocketError?)
+    /// When we receive the close frame this method will be invoked
+    ///
+    /// - Parameters:
+    ///   - websocket: websocket
+    ///   - code: WebsocketCode
+    ///   - reason: The server given reason
+    func websocket(_ websocekt: SwiftAsyncWebsocket, didCloseWith code: UInt16, reason: String?)
     /// This function will be called when websocket receive ping data
     /// Under normal condition, the ping data will be empty
     /// But in RF6455 the control frame can send less then 125 bytes data
@@ -41,7 +54,6 @@ public protocol SwiftAsyncWebsocketDelegate: class {
     /// - Returns: If return data is nil then websocket will ignore ping data
     ///        if you want to reply to pong, you can return a data
     func websocket(_ websocket: SwiftAsyncWebsocket, didReceivePing data: Data) -> Data?
-
     /// This method will be called when we receive Pong data from server
     ///
     /// - Parameters:

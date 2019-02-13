@@ -18,7 +18,7 @@
 		02D94293220697BB006B774F /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D94289220697BB006B774F /* RequestHeader.swift */; };
 		02D94294220697BB006B774F /* ResponseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428A220697BB006B774F /* ResponseHeader.swift */; };
 		02D94295220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */; };
-		02D94297220697C6006B774F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02D9428C220697BB006B774F /* Info.plist */; };
+		02D942B62213BA88006B774F /* CloseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D942B52213BA87006B774F /* CloseData.swift */; };
 		065A0751AB06E3A1B4BE265B /* Pods_SwiftAsyncWebsocketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */; };
 		930A09F75D39C6FE7ADE9A49 /* Pods_SwiftAsyncWebsocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA146370FEA9EE8B285D9A39 /* Pods_SwiftAsyncWebsocket.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +48,7 @@
 		02D9428A220697BB006B774F /* ResponseHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseHeader.swift; sourceTree = "<group>"; };
 		02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAsyncWebsocketDelegate.swift; sourceTree = "<group>"; };
 		02D9428C220697BB006B774F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02D942B52213BA87006B774F /* CloseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseData.swift; sourceTree = "<group>"; };
 		11C54769E0F0916323AC6959 /* Pods-SwiftAsyncWebsocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.debug.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.debug.xcconfig"; sourceTree = "<group>"; };
 		3C5E229A4EE952F319CDE618 /* Pods-SwiftAsyncWebsocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAsyncWebsocket.release.xcconfig"; path = "Target Support Files/Pods-SwiftAsyncWebsocket/Pods-SwiftAsyncWebsocket.release.xcconfig"; sourceTree = "<group>"; };
 		9F4B6A8CCB70B2D551B23C96 /* Pods_SwiftAsyncWebsocketTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAsyncWebsocketTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,8 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				02D94282220697BB006B774F /* SwiftAsyncWebsocket.swift */,
-				02D94283220697BB006B774F /* Utils */,
 				02D9428B220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift */,
+				02D94283220697BB006B774F /* Utils */,
 				02D9428C220697BB006B774F /* Info.plist */,
 			);
 			path = Sources;
@@ -120,13 +121,14 @@
 		02D94283220697BB006B774F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				02D94284220697BB006B774F /* FrameData.swift */,
 				02D94285220697BB006B774F /* WebsocketError.swift */,
 				02D94286220697BB006B774F /* Opcode.swift */,
-				02D94287220697BB006B774F /* SIMDHelper.swift */,
 				02D94288220697BB006B774F /* SecurityCode.swift */,
 				02D94289220697BB006B774F /* RequestHeader.swift */,
 				02D9428A220697BB006B774F /* ResponseHeader.swift */,
+				02D94287220697BB006B774F /* SIMDHelper.swift */,
+				02D94284220697BB006B774F /* FrameData.swift */,
+				02D942B52213BA87006B774F /* CloseData.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -244,7 +246,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02D94297220697C6006B774F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +312,7 @@
 			files = (
 				02D9428F220697BB006B774F /* WebsocketError.swift in Sources */,
 				02D94290220697BB006B774F /* Opcode.swift in Sources */,
+				02D942B62213BA88006B774F /* CloseData.swift in Sources */,
 				02D94295220697BB006B774F /* SwiftAsyncWebsocketDelegate.swift in Sources */,
 				02D9428D220697BB006B774F /* SwiftAsyncWebsocket.swift in Sources */,
 				02D94293220697BB006B774F /* RequestHeader.swift in Sources */,

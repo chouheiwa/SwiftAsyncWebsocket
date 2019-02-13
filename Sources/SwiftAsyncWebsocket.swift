@@ -54,6 +54,7 @@ public class SwiftAsyncWebsocket {
         // 2000-2999: Reserved for use by WebSocket extensions.
         // 3000-3999: Available for use by libraries and frameworks. May not be used by applications. Available for registration at the IANA via first-come, first-serve.
         // 4000-4999: Available for use by applications.
+        
     }
 
     let socket: SwiftAsyncSocket
@@ -89,6 +90,8 @@ public class SwiftAsyncWebsocket {
     var currentCode: Opcode?
 
     var cacheData: Data?
+
+    var closeData: CloseData?
 
     public init(requestHeader: RequestHeader,
                 delegate: SwiftAsyncWebsocketDelegate?,
@@ -161,30 +164,9 @@ public class SwiftAsyncWebsocket {
             return
         }
 
-        let finalReason = reason ?? ""
+        let closeData = CloseData(closeCode: code, closeReason: reason)
 
-        guard let utf8Reason = finalReason.data(using: .utf8) else {
-            fatalError("Convert UTF8 failed")
-        }
-        let size = MemoryLayout<UInt16>.size
-
-        var sendData = Data(count: min(125, utf8Reason.count + size))
-
-        sendData.withUnsafeMutableBytes {
-            $0.pointee = CFSwapInt16(code.rawValue)
-        }
-
-        if utf8Reason.count > 0 {
-            let totalIndex = sendData.count - 1
-
-            sendData.replaceSubrange(size..<totalIndex,
-                                     with: utf8Reason.withUnsafeBytes({UnsafeRawPointer($0)}),
-                                     count: min(123, sendData.count))
-        }
-
-        let frameData = FrameData(opcode: .CLOSING, data: sendData)
-
-        socket.write(data: frameData.caculateToSendData(), timeOut: -1, tag: 1)
+        socket.write(data: closeData.convertToSendData(), timeOut: -1, tag: 1)
     }
 
     func judgeTimeOut() throws -> TimeInterval {
@@ -209,11 +191,14 @@ public class SwiftAsyncWebsocket {
         do {
             try block()
         } catch let error as WebsocketError {
-
-            print("Error:\(error)")
-
-            socket.userData = error
-            socket.disconnect()
+            switch error {
+            case .responseProtolError(pro: let msg):
+                close(code: .protocolError, reason: msg)
+                socket.disconnectAfterWriting()
+            default:
+                socket.userData = error
+                socket.disconnect()
+            }
         } catch {
             fatalError("\(error)")
         }
@@ -234,15 +219,7 @@ public class SwiftAsyncWebsocket {
         case .PONG:
             delegate?.websocket(self, didReceovePong: frameData.data)
         case .CLOSING:
-            guard state == .open else {
-                socket.disconnect()
-                return
-            }
-
-            state = .closing
-            let frameData = FrameData(opcode: .CLOSING, data: Data())
-            socket.write(data: frameData.caculateToSendData(), timeOut: -1, tag: 1)
-            socket.disconnectAfterWriting()
+            handleClose(data: frameData)
         case .CONTINUOUS:
             try handleContinuous(data: frameData)
         case .BINARY:
@@ -334,6 +311,29 @@ public class SwiftAsyncWebsocket {
             }
         }
     }
+
+    func handleClose(data: FrameData) {
+        guard state == .open else {
+            socket.disconnect()
+            return
+        }
+
+        state = .closing
+
+        do {
+            let closeData = try CloseData(data: data.data)
+
+            self.closeData = closeData
+
+            close(code: .normal, reason: nil)
+        } catch let error as CloseData.CloseError {
+            close(code: .protocolError, reason: error.reason)
+        } catch {
+            fatalError("\(error)")
+        }
+
+        socket.disconnectAfterWriting()
+    }
 }
 
 extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
@@ -359,6 +359,7 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
     }
 
     public func socket(_ socket: SwiftAsyncSocket, didConnect toHost: String, port: UInt16) {
+        delegate?.websocketDidConnect(self)
         handleError {
             socket.write(data: requestHeader.toData(), timeOut: -1, tag: DataType.prepare.rawValue)
             socket.readData(toData: SwiftAsyncSocket.CRLFData + SwiftAsyncSocket.CRLFData,
@@ -398,10 +399,17 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
     public func socket(_ socket: SwiftAsyncSocket?, didDisconnectWith error: SwiftAsyncSocketError?) {
         guard let socket = socket else { return }
         
-        self.state = .closed
+        socket.socketQueueDo {
+            self.state = .closed
+        }
+
+        if let closeData = closeData {
+            delegate?.websocket(self, didCloseWith: closeData.closeCode, reason: closeData.closeReason)
+            return
+        }
 
         if let error = socket.userData as? WebsocketError {
-            delegate?.websocket(self, didCloseWith: error)
+            delegate?.websocket(self, failedConnect: error)
             return
         }
 
@@ -416,6 +424,6 @@ extension SwiftAsyncWebsocket: SwiftAsyncSocketDelegate {
             }
         }
 
-        delegate?.websocket(self, didCloseWith: webError)
+        delegate?.websocket(self, failedConnect: webError)
     }
 }
