@@ -67,3 +67,7 @@ do {
 ```
 
 In real project, you need to control websocket lifecycle by yourself. And you need to implement the websocket delegate method.
+
+There has been a demo for simple use SwiftAsyncWebsocket
+
+Demo page: https://github.com/SwiftAsyncSocket/SwiftAsyncWebsocketDemo
